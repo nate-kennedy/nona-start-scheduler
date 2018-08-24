@@ -8,13 +8,13 @@ VERSION=$(cat $DIR/../version)
 deployImage() {
     eval $(aws ecr get-login --no-include-email --region us-east-1)
 
-    docker tag nona-s3-pull:latest \
-        ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-s3-pull:latest
-    docker tag nona-s3-pull:latest \
-        ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-s3-pull:${VERSION}
+    docker tag nona-start-scheduler:latest \
+        ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-start-scheduler:latest
+    docker tag nona-start-scheduler:latest \
+        ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-start-scheduler:${VERSION}
     
-    docker push ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-s3-pull:latest
-    docker push ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-s3-pull:${VERSION}
+    docker push ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-start-scheduler:latest
+    docker push ${AWS_ACCOUNT_NUM}.dkr.ecr.us-east-1.amazonaws.com/nona-start-scheduler:${VERSION}
 }
 
 tagGit() {
@@ -24,7 +24,7 @@ tagGit() {
 }
 
 createArtifact() {
-    docker save nona-s3-pull -o nona-s3-pull.tar
+    docker save nona-start-scheduler -o nona-start-scheduler.tar
 }
 
 deployImage
